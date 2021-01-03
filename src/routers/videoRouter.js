@@ -1,16 +1,16 @@
 import express from "express";
-import routes from "../routes.js";
+import routes from "./routes.js";
 import {
-    getUpload,
-    postUpload,
-    videoDetail,
-    getEditVideo,
-    deleteVideo,
-    postEditVideo
-  } from "../controllers/videoControllers";
-import { uploadVideo } from "../middlewares.js";
+  getUpload,
+  postUpload,
+  videoDetail,
+  getEditVideo,
+  deleteVideo,
+  postEditVideo,
+} from "../controllers/videoControllers";
+import { uploadVideo } from "../../middlewares.js";
 
-const videoRouter=express.Router();
+const videoRouter = express.Router();
 
 //Upload
 videoRouter.get(routes.upload, getUpload);
@@ -21,7 +21,7 @@ videoRouter.get(routes.videoDetail(), videoDetail);
 
 //Edit Video
 videoRouter.get(routes.editVideo(), getEditVideo);
-videoRouter.post(routes.editVideo(),postEditVideo);
+videoRouter.post(routes.editVideo(), postEditVideo);
 //delete Video
 videoRouter.get(routes.deleteVideo(), deleteVideo);
 
