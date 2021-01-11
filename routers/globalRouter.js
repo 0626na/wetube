@@ -7,12 +7,12 @@ import {
   logout,
 } from "../controllers/userControllers";
 import { home, search } from "../controllers/videoControllers";
-import routes from "./routes";
+import routes from "../routes";
 
 const globalRouter = express.Router();
 
 globalRouter.get(routes.join, getJoin);
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, postJoin, postLogin);
 
 globalRouter.get(routes.login, getLogin);
 globalRouter.post(routes.login, postLogin);

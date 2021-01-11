@@ -1,8 +1,9 @@
 import "./db";
 import app from "./app";
 import dotenv from "dotenv";
-import "./src/models/Videos";
-import "./src/models/Comment";
+import "./models/Videos";
+import "./models/Comment";
+import "./models/User";
 
 dotenv.config();
 

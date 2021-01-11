@@ -1,4 +1,4 @@
-import { deleteVideo } from "../controllers/videoControllers";
+import { deleteVideo } from "./controllers/videoControllers";
 
 //Global
 const HOME = "/";
