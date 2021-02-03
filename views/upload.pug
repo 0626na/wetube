@@ -1,7 +1,7 @@
 extends layouts/main
 
 block content
-    .form__container
+    .form-container
         form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
             .fileUpload
                 label(for="file") Video File
