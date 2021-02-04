@@ -28,6 +28,10 @@ const DELETE_VIDEO = "/:id/delete";
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
 
+//API
+const API = "/api";
+const REGISTESR_VIEW = "/:id/view";
+
 const routes = {
   home: HOME,
   join: JOIN,
@@ -66,6 +70,8 @@ const routes = {
   github: GITHUB,
   githubCallback: GITHUB_CALLBACK,
   me: ME,
+  api: API,
+  registerView: REGISTESR_VIEW,
 };
 
 export default routes;

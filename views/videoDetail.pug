@@ -13,13 +13,16 @@ block content
             p.video__description=video.description
             if video.views=== 1
                 span.video__views 1 view
+                 .video__author
+                        |Uploaded by 
+                        a(href=routes.userDetail(video.creator.id))=video.creator.name
             else
                 span.video__views #{video.views} views
                 .video__comments
                     if video.comments.length === 1
-                        span.video__comment-number 1 Comment
+                        span.video__comment-number 1 Comment    
                     else
                         span.video__comment-number #{video.comments.length} Comments
-                        .video__author
-                            |Uploaded by 
-                            a(href=routes.userDetail(video.creator.id))=video.creator.name
+                    .video__author
+                        |Uploaded by 
+                        a(href=routes.userDetail(video.creator.id))=video.creator.name
