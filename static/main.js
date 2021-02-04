@@ -121,6 +121,7 @@ var volumeBtn = document.getElementById("jsVolumeBtn");
 var fullScrnBtn = document.getElementById("jsFullScreen");
 var currenTime = document.getElementById("currentTime");
 var totalTime = document.getElementById("totalTime");
+var volumeRange = document.getElementById("jsVolume");
 
 var handlePlayClick = function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -135,9 +136,11 @@ var handlePlayClick = function handlePlayClick() {
 var handleVolumeClick = function handleVolumeClick() {
   if (videoPlayer.muted) {
     videoPlayer.muted = false;
+    volumeRange.value = videoPlayer.volume;
     volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
   } else {
     videoPlayer.muted = true;
+    volumeRange.value = 0;
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 };
@@ -155,11 +158,32 @@ var exitFullScreen = function exitFullScreen() {
   fullScrnBtn.addEventListener("click", goFullScreen);
 };
 
+var handleEnded = function handleEnded() {
+  videoPlayer.currenTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+};
+
+var handleDrag = function handleDrag(event) {
+  var value = event.target.value;
+  videoPlayer.volume = value;
+
+  if (value >= 0.6) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else if (value >= 0.2) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+  } else {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
+  }
+};
+
 var init = function init() {
+  videoPlayer.volume = 0.5;
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScrnBtn.addEventListener("click", goFullScreen);
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("ended", handleEnded);
+  volumeRange.addEventListener("input", handleDrag);
 };
 
 var formatDate = function formatDate(seconds) {
@@ -192,7 +216,7 @@ var setTotalTime = function setTotalTime() {
 };
 
 var getCurrentTime = function getCurrentTime() {
-  currenTime.innerHTML = formatDate(videoPlayer.currentTime);
+  currenTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 };
 
 if (videoContainer) {

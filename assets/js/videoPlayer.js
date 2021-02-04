@@ -7,6 +7,7 @@ const volumeBtn = document.getElementById("jsVolumeBtn");
 const fullScrnBtn = document.getElementById("jsFullScreen");
 const currenTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
+const volumeRange = document.getElementById("jsVolume");
 const handlePlayClick = () => {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -20,9 +21,11 @@ const handlePlayClick = () => {
 const handleVolumeClick = () => {
   if (videoPlayer.muted) {
     videoPlayer.muted = false;
+    volumeRange.value = videoPlayer.volume;
     volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
   } else {
     videoPlayer.muted = true;
+    volumeRange.value=0;
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 };
@@ -40,11 +43,38 @@ const exitFullScreen = () => {
   fullScrnBtn.addEventListener("click", goFullScreen);
 };
 
+const handleEnded= () =>{
+  videoPlayer.currenTime=0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
+const handleDrag = (event) => {
+  const {
+    target:{value}
+  }=event;
+  videoPlayer.volume=value;
+  if(value>=0.6)
+  {
+    volumeBtn.innerHTML='<i class="fas fa-volume-up"></i>';
+  }
+  else if(value>=0.2)
+  {
+    volumeBtn.innerHTML='<i class="fas fa-volume-down"></i>';
+  }
+  else
+  {
+    volumeBtn.innerHTML='<i class="fas fa-volume-off"></i>';
+  }
+}
+
 const init = () => {
+  videoPlayer.volume=0.5;
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScrnBtn.addEventListener("click", goFullScreen);
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("ended",handleEnded);
+  volumeRange.addEventListener("input",handleDrag);
 };
 
 const formatDate = (seconds) => {
@@ -72,7 +102,7 @@ const setTotalTime = () => {
   setInterval(getCurrentTime, 1000);
 };
 const getCurrentTime = () => {
-  currenTime.innerHTML = formatDate(videoPlayer.currentTime);
+  currenTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 };
 if (videoContainer) {
   init();
