@@ -31,7 +31,7 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 //API
 const API = "/api";
 const REGISTESR_VIEW = "/:id/view";
-
+const ADD_COMMENT = "/:id/comment";
 const routes = {
   home: HOME,
   join: JOIN,
@@ -72,6 +72,7 @@ const routes = {
   me: ME,
   api: API,
   registerView: REGISTESR_VIEW,
+  addComment: ADD_COMMENT,
 };
 
 export default routes;
