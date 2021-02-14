@@ -1,16 +1,22 @@
 # wetube
+Youtube Service Clone Coding
 
-바닐라js와 nodejs를 이용한 유튜브 클론코딩
+## skill stacks
+- vanillaJS, Node.JS, express
+- ES6, Pug
+- MongoDB, mongoose
 
-## pages:
+## making
+- User Authentication
+- Log In, Log out
+- Github Login
+- User profile
+- Video upload
+- Video Search
+- Video Views
+- Comments
 
-- [ ] Home
-- [x] Join
-- [x] Login
-- [x] Search
-- [ ] User Detail
-- [ ] Edit Profile
-- [ ] Change Password
-- [ ] Upload
-- [ ] Video Detail
-- [x] Edit Video
+## Theory
+- MVC
+- routing
+- noSQL Model
